@@ -13,6 +13,7 @@
 		8B4EE86C21FBBF2D0016E98F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B4EE86B21FBBF2D0016E98F /* Assets.xcassets */; };
 		8B4EE86F21FBBF2D0016E98F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B4EE86D21FBBF2D0016E98F /* LaunchScreen.storyboard */; };
 		8B4EE8772200FC240016E98F /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4EE8762200FC240016E98F /* CategoryCell.swift */; };
+		8B4EE8A322026BB40016E98F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4EE8A222026BB40016E98F /* Models.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		8B4EE86E21FBBF2D0016E98F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B4EE87021FBBF2D0016E98F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B4EE8762200FC240016E98F /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		8B4EE8A222026BB40016E98F /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				8B4EE86421FBBF2C0016E98F /* AppDelegate.swift */,
 				8B4EE86621FBBF2D0016E98F /* ViewController.swift */,
 				8B4EE8762200FC240016E98F /* CategoryCell.swift */,
+				8B4EE8A222026BB40016E98F /* Models.swift */,
 				8B4EE86821FBBF2D0016E98F /* Main.storyboard */,
 				8B4EE86B21FBBF2D0016E98F /* Assets.xcassets */,
 				8B4EE86D21FBBF2D0016E98F /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				8B4EE86721FBBF2D0016E98F /* ViewController.swift in Sources */,
 				8B4EE86521FBBF2D0016E98F /* AppDelegate.swift in Sources */,
 				8B4EE8772200FC240016E98F /* CategoryCell.swift in Sources */,
+				8B4EE8A322026BB40016E98F /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
