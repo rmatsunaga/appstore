@@ -105,19 +105,19 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
 class AppCell: UICollectionViewCell {
     var app: App? {
         didSet {
-            if let name = app?.name {
+            if let name = app?.Name {
                 nameLabel.text = name
             }
             
-            categoryLabel.text = app?.category
+            categoryLabel.text = app?.Category
             
-            if let price = app?.price {
+            if let price = app?.Price {
                 priceLabel.text = "$\(price)"
             } else {
                 priceLabel.text = ""
             }
             
-            if let imageName = app?.imageName {
+            if let imageName = app?.ImageName {
                 imageView.image = UIImage(named: imageName)
             }
             
@@ -142,20 +142,20 @@ class AppCell: UICollectionViewCell {
     }()
     let nameLabel: UILabel = {
        let label = UILabel()
-        label.text = "Disney Build It: Frozen"
+        label.text = ""
         label.font = UIFont.systemFont(ofSize: 14)
         label.numberOfLines = 0
         return label
     }()
     let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "Entertainment"
+        label.text = ""
         label.font = UIFont.systemFont(ofSize: 13)
         return label
     }()
     let priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "$3.99"
+        label.text = ""
         label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = .darkGray
         return label

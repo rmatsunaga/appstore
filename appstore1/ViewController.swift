@@ -12,21 +12,29 @@ class FeaturedAppsController: UICollectionViewController, UICollectionViewDelega
     
     private let cellId = "cellId"
     
+    var categories: AllCategories?
     var appCategories: [AppCategory]?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
  //       appCategories = AppCategory.sampleAppCategories()
-        AppCategory.fetchFeaturedApps()
+        AppCategory.fetchFeaturedApps{(data) in
+            self.categories = data
+            self.appCategories = data.categories
+            self.collectionView?.reloadData()
+        }
         
         collectionView?.backgroundColor = .white
-        
+        collectionView?.alwaysBounceVertical = true
         collectionView?.register(CategoryCell.self, forCellWithReuseIdentifier: cellId)
         
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? CategoryCell else {
+            fatalError()
+        }
         cell.appCategory = appCategories?[indexPath.item]
         return cell
     }

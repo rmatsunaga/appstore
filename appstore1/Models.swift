@@ -9,42 +9,28 @@
 import UIKit
 import Foundation
 
-struct AppCategories {
-    let appCategories: [AppCategory]
-    
-    struct AppCategoriesCodingKeys: CodingKey {
-        let stringValue: String
-        
-        init?(stringValue: String) {
-            self.stringValue = stringValue
-        }
-        
-        var intValue: Int? { return nil }
-        
-        init?(intValue: Int) { return nil }
-        
-        static let categories = AppCategoryCodingKeys(stringValue: "categories")!
-        
-    }
-    
-    enum AppCategoryCodingKeys: CodingKey {
-        case name
-        case apps
-        case type
-    }
+struct AllCategories: Decodable {
+    let bannerCategory: AppCategory?
+    let categories: [AppCategory]?
 }
 
-class AppCategory {
+struct AppCategory: Decodable {
     
     var name: String?
     var apps: [App]?
     var type: String?
     
-    required convenience init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: AppCategoryCodingKeys.self)
-    }
     
-    static func fetchFeaturedApps() {
+//    required convenience init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: OuterCodingKeys.self)
+//        let appCategories = try container.decode([AppCategory].self, forKey: .appCategory)
+//        for dict in appCategories as! [String: Any] {
+//            print(dict)
+//        }
+//        self.init()
+//    }
+
+    static func fetchFeaturedApps(completionHandler: @escaping (AllCategories) -> Void) {
         guard let appStoreUrl = URL(string: "https://api.letsbuildthatapp.com/appstore/featured") else { return }
         
         URLSession.shared.dataTask(with:appStoreUrl) { (data, response, error) in
@@ -52,80 +38,24 @@ class AppCategory {
                 print(error!.localizedDescription)
             }
             
-            guard let data = data else { return }
-                
             do {
-                let decoder = JSONDecoder()
-                
-                decoder.keyDecodingStrategy = .useDefaultKeys
-                let appStoreData = try decoder.decode([String : AppCategory].self, from: data)
-                
+                let decodedApps = try JSONDecoder().decode(AllCategories.self, from: data!)
                 DispatchQueue.main.async {
-                    print(appStoreData)
+                    print(decodedApps)
+                    completionHandler(decodedApps)
                 }
-            } catch let jsonError {
-                print(jsonError)
+            } catch let err {
+                print(err)
             }
         }.resume()
     }
-    
-
-//    static func sampleAppCategories() -> [AppCategory] {
-//        let bestNewAppsCategory = AppCategory()
-//        bestNewAppsCategory.name = "Best New Apps"
-//        var apps = [App]()
-//        // logic
-//        let frozenApp = App()
-//        frozenApp.name = "Disney Build It: Frozen"
-//        frozenApp.imageName = "frozen"
-//        frozenApp.category = "Entertainment"
-//        frozenApp.price = Double(3.99)
-//        apps.append(frozenApp)
-//
-//        bestNewAppsCategory.apps = apps
-//
-//        let bestNewGamesCategory = AppCategory()
-//        bestNewGamesCategory.name = "Best New Games"
-//
-//        var bestNewGamesApps = [App]()
-//        let telepaint = App()
-//        telepaint.name = "Telepaint"
-//        telepaint.imageName = "telepaint"
-//        telepaint.category = "Games"
-//        telepaint.price = Double(2.99)
-//        bestNewGamesApps.append(telepaint)
-//        bestNewGamesCategory.apps = bestNewGamesApps
-//        return [bestNewAppsCategory, bestNewGamesCategory]
-//    }
-    
 }
 
-class App: NSObject, Decodable {
-    
-    var name: String?
-    var id: Int?
-    var category: String?
-    var price: Double?
-    var imageName: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case name = "Name"
-        case category = "Category"
-        case price = "Price"
-        case id = "Id"
-        case imageName = "ImageName"
-    }
-    
+class App: Decodable {
+    var Id: Int?
+    var Name: String?
+    var Category: String?
+    var Price: Double?
+    var ImageName: String?
 }
 
-
-//extension AppCategory: Decodable {
-//    required convenience init(from decoder: Decoder) throws {
-//        let outerContainer = try decoder.container(keyedBy: OuterCodingKeys.self)
-//        let innerContainer = try outerContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .categories)
-//
-//        self.name = try innerContainer.decode(String.self, forKey: .name)
-//        self.apps = try innerContainer.decode([App].self, forKey: .apps)
-//        self.type = try innerContainer.decode(String.self, forKey: .type)
-//    }
-//}
