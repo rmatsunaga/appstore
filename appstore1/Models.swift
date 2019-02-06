@@ -41,7 +41,6 @@ struct AppCategory: Decodable {
             do {
                 let decodedApps = try JSONDecoder().decode(AllCategories.self, from: data!)
                 DispatchQueue.main.async {
-                    print(decodedApps)
                     completionHandler(decodedApps)
                 }
             } catch let err {
