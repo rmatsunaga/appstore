@@ -19,16 +19,6 @@ struct AppCategory: Decodable {
     var name: String?
     var apps: [App]?
     var type: String?
-    
-    
-//    required convenience init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: OuterCodingKeys.self)
-//        let appCategories = try container.decode([AppCategory].self, forKey: .appCategory)
-//        for dict in appCategories as! [String: Any] {
-//            print(dict)
-//        }
-//        self.init()
-//    }
 
     static func fetchFeaturedApps(completionHandler: @escaping (AllCategories) -> Void) {
         guard let appStoreUrl = URL(string: "https://api.letsbuildthatapp.com/appstore/featured") else { return }
@@ -50,7 +40,7 @@ struct AppCategory: Decodable {
     }
 }
 
-class App: Decodable {
+struct App: Decodable {
     var Id: Int?
     var Name: String?
     var Category: String?

@@ -14,6 +14,7 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
             if let name = appCategory?.name {
                 nameLabel.text = name
             }
+            appsCollectionView.reloadData()
         }
     }
     
@@ -107,9 +108,22 @@ class AppCell: UICollectionViewCell {
         didSet {
             if let name = app?.Name {
                 nameLabel.text = name
+                
+                let rect = NSString(string: name).boundingRect(with: CGSize.init(width: frame.width, height: 1000), options: NSStringDrawingOptions.usesFontLeading.union(NSStringDrawingOptions.usesLineFragmentOrigin), attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], context: nil)
+                
+                if rect.height > 20 {
+                    categoryLabel.frame = CGRect(x: 0, y: frame.width + 38, width: frame.width, height: 20)
+                    priceLabel.frame = CGRect.init(x: 0, y: frame.width + 56, width: frame.width, height: 20)
+                } else {
+                    categoryLabel.frame = CGRect(x: 0, y: frame.width + 22, width: frame.width, height: 20)
+                    priceLabel.frame = CGRect.init(x: 0, y: frame.width + 40, width: frame.width, height: 20)
+                }
+                nameLabel.frame = CGRect.init(x: 0, y: frame.width + 5, width: frame.width, height: 40)
+                nameLabel.sizeToFit()
             }
             
             categoryLabel.text = app?.Category
+            
             
             if let price = app?.Price {
                 priceLabel.text = "$\(price)"
@@ -144,7 +158,7 @@ class AppCell: UICollectionViewCell {
        let label = UILabel()
         label.text = ""
         label.font = UIFont.systemFont(ofSize: 14)
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         return label
     }()
     let categoryLabel: UILabel = {
