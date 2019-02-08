@@ -37,11 +37,18 @@ class FeaturedAppsController: UICollectionViewController, UICollectionViewDelega
         collectionView?.register(Header.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         
     }
+
+    func showAppDetailForApp(app: App) {
+        let appDetailController = UIViewController()
+        navigationController?.pushViewController(appDetailController, animated: true)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if indexPath.item == 2 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: largeCellId, for: indexPath) as! LargeCategoryCell
             cell.appCategory = appCategories?[indexPath.item]
+            cell.featuredAppsController = self
             return cell
         }
         
@@ -49,6 +56,7 @@ class FeaturedAppsController: UICollectionViewController, UICollectionViewDelega
             fatalError()
         }
         cell.appCategory = appCategories?[indexPath.item]
+        cell.featuredAppsController = self
         return cell
     }
 
