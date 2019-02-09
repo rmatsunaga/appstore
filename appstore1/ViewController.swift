@@ -39,7 +39,9 @@ class FeaturedAppsController: UICollectionViewController, UICollectionViewDelega
     }
 
     func showAppDetailForApp(app: App) {
-        let appDetailController = UIViewController()
+        let layout = UICollectionViewFlowLayout()
+        let appDetailController = AppDetailController(collectionViewLayout: layout)
+        appDetailController.app = app
         navigationController?.pushViewController(appDetailController, animated: true)
     }
     
