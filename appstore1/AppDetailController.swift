@@ -49,13 +49,38 @@ class AppDetailHeader: BaseCell {
             if let imageName = app?.ImageName {
                 imageView.image = UIImage.init(named: imageName)
             }
+            if let title = app?.Name {
+                nameLabel.text = title
+            }
+            if let text = app?.Category {
+                categoryLabel.text = text
+            }
+            if let price = app?.Price {
+                buyButton.setTitle("$\(String(price))", for: .normal)
+            }
             
         }
     }
     
-    var segmentedControl: UISegmentedControl = {
+    let segmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Details", "Reviews", "Related"])
+        sc.tintColor = .darkGray
+        sc.selectedSegmentIndex = 0
         return sc
+    }()
+    
+    let nameLabel: UILabel = {
+        let name = UILabel()
+        name.font = UIFont.systemFont(ofSize: 16.0)
+        
+        return name
+    }()
+    
+    let categoryLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15.0)
+        label.textColor = .gray
+        return label
     }()
     
     let imageView: UIImageView = {
@@ -67,15 +92,45 @@ class AppDetailHeader: BaseCell {
         return iv
     }()
     
+    let buyButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("BUY", for: .normal)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.init(red: 0, green: 129/255, blue: 250/255, alpha: 1).cgColor
+        button.layer.cornerRadius = 5
+        
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        return button
+    }()
+    
+    let dividerLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.init(white: 0.4, alpha: 0.4)
+        return view
+    }()
+    
     override func setupViews() {
         super.setupViews()
         addSubview(imageView)
         addSubview(segmentedControl)
+        addSubview(nameLabel)
+        addSubview(categoryLabel)
+        addSubview(buyButton)
+        addSubview(dividerLineView)
         imageView.backgroundColor = .yellow
-        addConstraintsWithFormat("H:|-14-[v0(100)]", views: imageView)
+        addConstraintsWithFormat("H:|-14-[v0(100)]-8-[v1]|", views: imageView, nameLabel)
         addConstraintsWithFormat("V:|-14-[v0(100)]", views: imageView)
+        
+        addConstraintsWithFormat("H:|-14-[v0(100)]-8-[v1]|", views: imageView, categoryLabel)
+        addConstraintsWithFormat("V:|-14-[v0(20)]-8-[v1(10)]", views: nameLabel, categoryLabel)
+        
         addConstraintsWithFormat("H:|-40-[v0]-40-|", views: segmentedControl)
-        addConstraintsWithFormat("V:[v0(34)]-8-|", views: segmentedControl)
+        addConstraintsWithFormat("V:[v0(32)]-15-[v1(34)]-8-|", views: buyButton, segmentedControl)
+        
+        addConstraintsWithFormat("H:[v0(60)]-14-|", views: buyButton)
+        
+        addConstraintsWithFormat("H:|[v0]|", views: dividerLineView)
+        addConstraintsWithFormat("V:[v0(0.5)]|", views: dividerLineView)
         
     }
     
