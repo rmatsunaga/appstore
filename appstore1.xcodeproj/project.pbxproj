@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B23C9812214F95D00AD332D /* ScreenshotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23C9802214F95D00AD332D /* ScreenshotCell.swift */; };
 		8B4BE200220E3D6500DE9FA0 /* AppDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4BE1FF220E3D6500DE9FA0 /* AppDetailController.swift */; };
 		8B4EE86521FBBF2D0016E98F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4EE86421FBBF2C0016E98F /* AppDelegate.swift */; };
 		8B4EE86721FBBF2D0016E98F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4EE86621FBBF2D0016E98F /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B23C9802214F95D00AD332D /* ScreenshotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotCell.swift; sourceTree = "<group>"; };
 		8B4BE1FF220E3D6500DE9FA0 /* AppDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailController.swift; sourceTree = "<group>"; };
 		8B4EE86121FBBF2C0016E98F /* appstore1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appstore1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B4EE86421FBBF2C0016E98F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				8B4EE86621FBBF2D0016E98F /* ViewController.swift */,
 				8B4EE8762200FC240016E98F /* CategoryCell.swift */,
 				8B4BE1FF220E3D6500DE9FA0 /* AppDetailController.swift */,
+				8B23C9802214F95D00AD332D /* ScreenshotCell.swift */,
 				8B4EE8A222026BB40016E98F /* Models.swift */,
 				8B4EE86821FBBF2D0016E98F /* Main.storyboard */,
 				8B4EE86B21FBBF2D0016E98F /* Assets.xcassets */,
@@ -149,6 +152,7 @@
 				8B4EE8772200FC240016E98F /* CategoryCell.swift in Sources */,
 				8B4BE200220E3D6500DE9FA0 /* AppDetailController.swift in Sources */,
 				8B4EE8A322026BB40016E98F /* Models.swift in Sources */,
+				8B23C9812214F95D00AD332D /* ScreenshotCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

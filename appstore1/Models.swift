@@ -46,5 +46,17 @@ struct App: Decodable {
     var Category: String?
     var Price: Double?
     var ImageName: String?
+    
+    var Screenshots: [String?]?
+    var description: String?
+    var appInformation: [AppInformation]?
+    
 }
+
+struct AppInformation: Decodable {
+    var Name: String?
+    var Value: String?
+}
+
+
 
