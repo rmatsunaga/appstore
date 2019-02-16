@@ -31,8 +31,6 @@ class ScreenshotCell: BaseCell, UICollectionViewDataSource, UICollectionViewDele
         return cv
     }()
     
-    
-    
     override func setupViews() {
         super.setupViews()
         collectionView.dataSource = self
@@ -57,15 +55,14 @@ class ScreenshotCell: BaseCell, UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ScreenshotImageCell
         
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ScreenshotImageCell
         if let imageName = app?.Screenshots?[indexPath.item] {
             cell.image.image = UIImage.init(named: imageName)
         }
-        
-        
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize.init(width: 240, height: frame.height - 28)
     }
@@ -81,8 +78,6 @@ class ScreenshotCell: BaseCell, UICollectionViewDataSource, UICollectionViewDele
             iv.backgroundColor = .green
             return iv
         }()
-        
-
         
         override func setupViews() {
             super.setupViews()

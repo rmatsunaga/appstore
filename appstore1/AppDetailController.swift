@@ -11,8 +11,6 @@ import UIKit
 class AppDetailController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var app: App? {
-        
-        
         didSet {
             navigationItem.title = app?.Name
 
@@ -23,7 +21,6 @@ class AppDetailController: UICollectionViewController, UICollectionViewDelegateF
                     if error != nil {
                         print(error!.localizedDescription)
                     }
-
                     do {
                         let decodedApp = try JSONDecoder().decode(App.self, from: data!)
                         self.app? = decodedApp
@@ -39,9 +36,9 @@ class AppDetailController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     private let headerId = "headerId"
-    
     let cellId = "detailCellId"
     let descriptionCellId = "descriptionCellId"
+    let informationCellId = "informationCellId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,22 +50,24 @@ class AppDetailController: UICollectionViewController, UICollectionViewDelegateF
         collectionView?.register(AppDetailHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         collectionView?.register(ScreenshotCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.register(AppDetailDescriptionCell.self, forCellWithReuseIdentifier: descriptionCellId)
+        collectionView?.register(AppDetailInformationCell.self, forCellWithReuseIdentifier: informationCellId)
         
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         if indexPath.item == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: descriptionCellId, for: indexPath) as! AppDetailDescriptionCell
-            
             cell.textView.attributedText = descriptionAttributedText()
-            
             return cell
+        } else if indexPath.item == 2 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: informationCellId, for: indexPath) as! AppDetailInformationCell
+            cell.appInfo = app?.appInformation
+            return cell
+            
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ScreenshotCell
             cell.app = app
             return cell
         }
-
     }
     
     private func descriptionAttributedText() -> NSAttributedString {
@@ -82,9 +81,10 @@ class AppDetailController: UICollectionViewController, UICollectionViewDelegateF
         
         if let desc = app?.description {
             attributedText.append(NSAttributedString(string: desc, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 11), NSAttributedString.Key.foregroundColor: UIColor.darkGray]))
-
+            
         }
         return attributedText
+
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -95,6 +95,10 @@ class AppDetailController: UICollectionViewController, UICollectionViewDelegateF
             
             let rect = descriptionAttributedText().boundingRect(with: size, options: options, context: nil)
             return CGSize.init(width: view.frame.width, height: rect.height + 30)
+            
+        } else if indexPath.item == 2 {
+            
+            return CGSize.init(width: view.frame.width, height: 210)
         }
         
         
@@ -102,7 +106,7 @@ class AppDetailController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -117,27 +121,6 @@ class AppDetailController: UICollectionViewController, UICollectionViewDelegateF
     
 }
 
-class AppDetailDescriptionCell: BaseCell{
-    let textView: UITextView = {
-        let tv = UITextView()
-        return tv
-    }()
-    let dividerLineView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.init(white: 0.4, alpha: 0.4)
-        return view
-    }()
-    override func setupViews() {
-        super.setupViews()
-        addSubview(textView)
-        addSubview(dividerLineView)
-        
-        addConstraintsWithFormat("H:|-8-[v0]-8-|", views: textView)
-        addConstraintsWithFormat("H:|-14-[v0]|", views: dividerLineView)
-
-        addConstraintsWithFormat("V:|-4-[v0]-4-[v1(1)]|", views: textView, dividerLineView)
-    }
-}
 
 class AppDetailHeader: BaseCell {
     
